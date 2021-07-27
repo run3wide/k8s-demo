@@ -26,8 +26,6 @@ spec:
   replicas: 1
   template:
     metadata:
-      annotations:
-        sidecar.istio.io/inject: "true"
       labels:
         app: k8s-demo
         version: v1
