@@ -1,10 +1,16 @@
 ##K8s demo app
 
-In platform directory
-- ```$ platform/setup.sh```
-- ```$ platform/deploy.sh```
+To run
+These steps are for Mac
 
-Check which port is the ingress port.
-- ```echo $(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.spec.ports[?(@.name=="http2")].nodePort}')```
-
-The app will serve up index from `http://localhost`
+1. Enable kubernetes in DockerDesktop
+1. Install istio (assumes `istioctl` can be found on PATH)
+   - ```$ ./script/setup.sh```
+1. Deploy resources
+   - ```$ ./script/deploy.sh```
+1. Take note of ingress port
+   - ```kubectl get svc```
+   - Look for the port for service k8s-demo
+1. Start kiali
+   - ```script/start-kiali.sh```
+1. Navigate to `localhost:${INGRESS_PORT}`
