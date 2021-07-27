@@ -1,0 +1,39 @@
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: springdemo
+  labels:
+    app: k8s-demo
+spec:
+  selector:
+    app: k8s-demo
+  ports:
+    - port: 8080
+      name: http
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8s-demo-v1
+  labels:
+    app: k8s-demo
+spec:
+  selector:
+    matchLabels:
+      app: k8s-demo
+  replicas: 1
+  template:
+    metadata:
+      annotations:
+        sidecar.istio.io/inject: "true"
+      labels:
+        app: k8s-demo
+        version: v1
+    spec:
+      containers:
+        - name: k8s-demo
+          image: docker.io/library/k8s-demo:0.0.2-SNAPSHOT
+          ports:
+            - containerPort: 8080
