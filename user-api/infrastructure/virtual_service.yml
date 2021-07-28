@@ -4,13 +4,13 @@ metadata:
   name: user-api-vs
 spec:
   hosts:
-    - "*"
+    - "user-api.run3wide.com"
   gateways:
     - k8s-demo-gateway
   http:
     - match:
         - uri:
-            prefix: "/user-api"
+            prefix: "/"
       route:
         - destination:
             port:
