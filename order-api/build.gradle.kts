@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.springframework.boot.gradle.tasks.bundling.BootBuildImage
 
 plugins {
     id("org.springframework.boot") version "2.5.3"
@@ -9,10 +10,13 @@ plugins {
 
 group = "com.run3wide"
 version = "0.0.3-SNAPSHOT"
-java.sourceCompatibility = JavaVersion.VERSION_11
 
 repositories {
     mavenCentral()
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
 }
 
 dependencies {
@@ -32,4 +36,8 @@ tasks.withType<KotlinCompile> {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+}
+
+tasks.getByName<BootBuildImage>("bootBuildImage") {
+    imageName = "run3wide/${project.name}"
 }

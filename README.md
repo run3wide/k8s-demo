@@ -8,7 +8,7 @@ These steps are for Mac
 1. Install istio (assumes `istioctl` can be found on PATH)
    - ```$ ./setup.sh```
 1. Deploy resources
-   - ```$ ./deploy.sh```
+   - ```$ ./${order-api or user-api}/infrastructure/deploy.sh```
 1. Start kiali
    - ```dashboards.sh```
 1. Take note of ingress port
