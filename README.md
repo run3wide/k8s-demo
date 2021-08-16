@@ -1,4 +1,4 @@
-##K8s demo app
+## K8s demo app
 
 This script will set up Kind kubernetes on a Linux machine.
 
@@ -15,3 +15,8 @@ This script will set up Kind kubernetes on a Linux machine.
 5. Services are reachable at ```http://localhost/some-path```
    - Note you will need to pass the host header matching the service
    - ex ```curl -v -HHost:order-api.run3wide.com http://localhost/rest/orders```
+   
+
+## Removing the cluster
+
+1. ```kind delete cluster --name dev-cluster```

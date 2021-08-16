@@ -3,6 +3,7 @@
 build_docker_image() {
   cd ../"$SERVICE_NAME" || exit 1
   ./gradlew bootBuildImage
+  cd ..
 }
 
 load_docker_image_into_kubernetes_cluster() {
@@ -10,8 +11,8 @@ load_docker_image_into_kubernetes_cluster() {
 }
 
 deploy_service() {
-  kubectl replace --force -f "infrastructure/resources.yml"
-  kubectl replace --force -f "infrastructure/virtual_service.yml"
+  kubectl replace --force -f "$SERVICE_NAME"/infrastructure/resources.yml
+  kubectl replace --force -f "$SERVICE_NAME"/infrastructure/virtual_service.yml
 }
 
 test_app_endpoint() {
@@ -28,10 +29,12 @@ test_app_endpoint() {
 
 set e
 SERVICE_NAME=$1
-CURRENT_DIRECTORY=$PWD
+CURRENT_DIRECTORY=$(pwd)
+cd "$CURRENT_DIRECTORY" || exit 1
 
-if [ -z "$SERVICE_NAME" ]; then
-  echo "SERVICE_NAME not set"
+if [ -z "$1" ]
+  then
+    echo "Service name was not supplied. Please enter a valid service name."
     exit 1
 fi
 
