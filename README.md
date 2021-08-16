@@ -1,19 +1,16 @@
 ##K8s demo app
 
-To run
-These steps are for Mac
+This script will set up Kind kubernetes on a Linux machine.
 
-1. Enable kubernetes in DockerDesktop
-1. ```cd script/```
-1. Install istio (assumes `istioctl` can be found on PATH)
+1. Create kubernetes cluster
+   1. ```kind create cluster --name dev-cluster```
+2. ```cd script/```
+3. Setup istio ingress gateway (assumes `istioctl` can be found on PATH)
    - ```$ ./setup.sh```
-1. Deploy resources 
-   - ```$ ./${order-api or user-api}/infrastructure/deploy.sh```
-1. Start kiali
-   - ```dashboards.sh```
-1. Take note of ingress port
-   - ```kubectl get svc```
-   - Look for the port for service k8s-demo
-1. Services are reachable at ```http://localhost/some-path```
+4. Deploy resources 
+   1. The deployment script takes one argument; the name of the module you wish to deploy.
+      - ```$ .deploy.sh user-api```
+      - The script will build, tag and load the docker image into the kubernetes cluster.
+7. Services are reachable at ```http://localhost/some-path```
    - Note you will need to pass the host header matching the service
    - ex ```curl -v -HHost:order-api.run3wide.com http://localhost/rest/orders```

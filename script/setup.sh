@@ -1,10 +1,26 @@
-#Install istio
-istioctl install --set profile=demo -y
+#!/bin/bash
 
-#Mark pods for istio injection
-kubectl label namespace default istio-injection=enabled
+install_istio() {
+  istioctl install --set profile=demo -y
+}
 
-#Install istio addons
-kubectl apply -f ~/istio-1.10.3/samples/addons/kiali.yaml
-kubectl apply -f ~/istio-1.10.3/samples/addons/prometheus.yaml
-kubectl apply -f ~/istio-1.10.3/samples/addons/grafana.yaml
+mark_pods_for_istio_injection() {
+  kubectl label namespace default istio-injection=enabled
+}
+
+install_istio_addons() {
+  ISTIOCTL_DIRECTORY=$(which istioctl)
+  ISTIO_DIRECTORY="${ISTIOCTL_DIRECTORY/"/bin/istioctl"/}"
+  kubectl apply -f "$ISTIO_DIRECTORY"/samples/addons/kiali.yaml
+  kubectl apply -f "$ISTIO_DIRECTORY"/samples/addons/prometheus.yaml
+  kubectl apply -f "$ISTIO_DIRECTORY"/samples/addons/grafana.yaml
+}
+
+start_dashboard() {
+  x-terminal-emulator -e istioctl dashboard kiali
+}
+
+install_istio
+mark_pods_for_istio_injection
+install_istio_addons
+start_dashboard

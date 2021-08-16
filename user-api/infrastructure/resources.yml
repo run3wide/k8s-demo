@@ -31,7 +31,7 @@ spec:
     spec:
       containers:
         - name: user-api
-          image: docker.io/run3wide/user-api:latest
+          image: run3wide/user-api:latest
           imagePullPolicy: Never
           ports:
             - containerPort: 8080
