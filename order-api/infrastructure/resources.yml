@@ -31,7 +31,7 @@ spec:
     spec:
       containers:
         - name: order-api
-          image: docker.io/run3wide/order-api:latest
+          image: run3wide/order-api:latest
           imagePullPolicy: Never
           ports:
             - containerPort: 8080
