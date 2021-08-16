@@ -16,8 +16,9 @@ install_istio_addons() {
   kubectl apply -f "$ISTIO_DIRECTORY"/samples/addons/grafana.yaml
 }
 
-start_dashboard() {
+start_dashboards() {
   x-terminal-emulator -e istioctl dashboard kiali
+  x-terminal-emulator -e istioctl dashboard grafana
 }
 
 deploy_gateway() {
@@ -30,4 +31,4 @@ deploy_gateway
 install_istio
 mark_pods_for_istio_injection
 install_istio_addons
-start_dashboard
+start_dashboards
