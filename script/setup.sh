@@ -20,6 +20,13 @@ start_dashboard() {
   x-terminal-emulator -e istioctl dashboard kiali
 }
 
+deploy_gateway() {
+  CURRENT_DIRECTORY=$(pwd)
+  cd "$CURRENT_DIRECTORY" || exit 1
+  kubectl apply -f ./../infrastructure/gateway.yml
+}
+
+deploy_gateway
 install_istio
 mark_pods_for_istio_injection
 install_istio_addons
