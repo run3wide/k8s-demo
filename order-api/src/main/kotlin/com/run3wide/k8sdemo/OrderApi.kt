@@ -2,10 +2,12 @@ package com.run3wide.k8sdemo
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
+import org.springframework.cloud.openfeign.EnableFeignClients
 
+@EnableFeignClients
 @SpringBootApplication
-class K8sDemoApplication
+class OrderApi
 
 fun main(args: Array<String>) {
-    runApplication<K8sDemoApplication>(*args)
+    runApplication<OrderApi>(*args)
 }
