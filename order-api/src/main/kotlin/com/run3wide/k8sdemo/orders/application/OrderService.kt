@@ -5,13 +5,13 @@ import com.run3wide.k8sdemo.orders.domain.OrderId
 import com.run3wide.k8sdemo.orders.domain.OrderRepository
 import com.run3wide.k8sdemo.orders.dto.CreateOrderDto
 import com.run3wide.k8sdemo.orders.dto.OrderDto
-import com.run3wide.k8sdemo.orders.infrastructure.UserApi
+import com.run3wide.k8sdemo.orders.infrastructure.UserApiClient
 import org.springframework.stereotype.Component
 
 @Component
 class OrderService(
     private val orderRepository: OrderRepository,
-    private val userApi: UserApi,
+    private val userApiClient: UserApiClient,
 ) {
 
     fun create(dto: CreateOrderDto) {
@@ -36,7 +36,7 @@ class OrderService(
         return OrderDto(
             id.value,
             userId,
-            userApi.getUser(userId).name,
+            userApiClient.getUser(userId).name,
             description,
         )
     }

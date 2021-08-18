@@ -4,8 +4,8 @@ import org.springframework.cloud.openfeign.FeignClient
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 
-@FeignClient(name = "user-api", url = "user-api.default.svc.cluster.local:8080")
-interface UserApi {
+@FeignClient(name = "user-api", url = "\${api.user-api.url}")
+interface UserApiClient {
 
     @GetMapping("/rest/users/{id}")
     fun getUser(@PathVariable id: String): UserDto
