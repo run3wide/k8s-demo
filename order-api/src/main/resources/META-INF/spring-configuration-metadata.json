@@ -1,0 +1,9 @@
+{
+  "properties": [
+    {
+      "name": "api.user-api.url",
+      "type": "java.lang.String",
+      "description": "Namespaced user-api url."
+    }
+  ]
+}

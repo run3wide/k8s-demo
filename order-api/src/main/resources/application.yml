@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: order-api
+logging:
+  file:
+    name: logfile
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+api:
+  user-api:
+    url: user-api.default.svc.cluster.local:8080

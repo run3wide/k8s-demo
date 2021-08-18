@@ -27,7 +27,6 @@ test_app_endpoint() {
   echo
 }
 
-set e
 SERVICE_NAME=$1
 CURRENT_DIRECTORY=$(pwd)
 cd "$CURRENT_DIRECTORY" || exit 1
