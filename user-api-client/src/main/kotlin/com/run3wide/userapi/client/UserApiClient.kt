@@ -1,10 +1,11 @@
-package com.run3wide.k8sdemo.orders.infrastructure
+package com.run3wide.userapi.client
 
+import com.run3wide.userapi.model.UserDto
 import org.springframework.cloud.openfeign.FeignClient
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 
-@FeignClient(name = "user-api", url = "\${api.user-api.url}")
+@FeignClient(name = "user-api-client", url = "\${api.user-api.url}")
 interface UserApiClient {
 
     @GetMapping("/rest/users/{id}")
@@ -13,8 +14,3 @@ interface UserApiClient {
     @GetMapping("/rest/users")
     fun getAllUsers(): List<UserDto>
 }
-
-data class UserDto(
-    val id: String,
-    val name: String,
-)
