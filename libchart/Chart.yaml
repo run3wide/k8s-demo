@@ -1,0 +1,7 @@
+apiVersion: v2
+name: libchart
+description: A Helm chart for Kubernetes
+type: library
+
+version: 0.0.1
+appVersion: "0.0.1"

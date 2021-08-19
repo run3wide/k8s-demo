@@ -1,0 +1,58 @@
+{{- define "libchart.application.tpl" -}}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.service.name }}
+  labels:
+    app: {{ .Values.service.name }}
+spec:
+  selector:
+    app: {{ required "value reuqire" .Values.service.name }}
+  ports:
+    - port: 8080
+      name: http
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.service.name }}-deployment
+  labels:
+    app: {{ .Values.service.name }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Values.service.name }}
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.service.name }}
+        version: v1
+    spec:
+      containers:
+        - name: {{ .Values.service.name }}
+          image: run3wide/{{ .Values.service.name }}:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8080
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: {{ .Values.service.name }}-virtual-service
+spec:
+  hosts:
+    - "{{ .Values.service.name }}.run3wide.com"
+  gateways:
+    - k8s-demo-gateway
+  http:
+    - match:
+        - uri:
+            prefix: "/"
+      route:
+        - destination:
+            port:
+              number: 8080
+            host: {{ .Values.service.name }}
+{{- end -}}
