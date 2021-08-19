@@ -16,8 +16,6 @@ install_istio_addons() {
   kubectl apply -f "$ISTIO_DIRECTORY"/samples/addons/grafana.yaml
 }
 
-
-
 deploy_gateway() {
   kubectl apply -f ./../infrastructure/gateway.yml
 }
