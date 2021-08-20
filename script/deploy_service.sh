@@ -11,8 +11,7 @@ load_docker_image_into_kubernetes_cluster() {
 }
 
 deploy_service() {
-  kubectl replace --force -f "$SERVICE_NAME"/infrastructure/resources.yml
-  kubectl replace --force -f "$SERVICE_NAME"/infrastructure/virtual_service.yml
+  helm upgrade "$SERVICE_NAME"/"$SERVICE_NAME"-chart --generate-name
 }
 
 test_app_endpoint() {
